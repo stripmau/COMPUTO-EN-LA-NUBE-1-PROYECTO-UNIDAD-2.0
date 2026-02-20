@@ -1,38 +1,54 @@
 {% extends 'base.html' %}
 {% block title %}Lista de Estudiantes{% endblock %}
 {% block content %}
-<a href="{{ url_for('create_estudiante') }}" class="btn btn-success mb-3">Agregar Estudiante</a>
-<br>
-<table class="table table-bordered">
+
+<div class="block">
+  <a href="{{ url_for('create_estudiante') }}" class="button is-success">
+    Agregar Estudiante
+  </a>
+</div>
+
+<div class="table-container">
+  <table class="table is-bordered is-fullwidth">
     <thead>
-        <tr>
-            <th>No. control</th>
-            <th>Nombre</th>
-            <th>Apellido Paterno</th>
-            <th>Apellido Materno</th>
-            <th>Semestre</th>
-            <th>Acciones</th>
-
-        </tr>
+      <tr>
+        <th>No. control</th>
+        <th>Nombre</th>
+        <th>Apellido Paterno</th>
+        <th>Apellido Materno</th>
+        <th>Semestre</th>
+        <th>Acciones</th>
+      </tr>
     </thead>
-    <tbody>
-        {% for estudiante in estudiantes %}
-        <tr>
-            <td>{{ estudiante.no_control }}</td>
-            <td>{{ estudiante.nombre }}</td>
-            <td>{{ estudiante.ap_paterno }}</td>
-            <td>{{ estudiante.ap_materno }}</td>
-            <td>{{ estudiante.semestre }}</td>
-            <td>
-               <a href="{{ url_for('delete_estudiante', no_control= estudiante.no_control )}}" 
-                class="btn btn-danger">Eliminar</a>
-                <a href="{{ url_for('update_estudiante', no_control= estudiante.no_control )}}" 
-                class="btn btn-warning">Actualizar</a> 
-            </td> 
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
 
+    <tbody>
+      {% for estudiante in estudiantes %}
+      <tr>
+        <td>{{ estudiante.no_control }}</td>
+        <td>{{ estudiante.nombre }}</td>
+        <td>{{ estudiante.ap_paterno }}</td>
+        <td>{{ estudiante.ap_materno }}</td>
+        <td>{{ estudiante.semestre }}</td>
+        <td>
+          <div class="buttons are-small">
+            <a
+              href="{{ url_for('update_estudiante', no_control=estudiante.no_control) }}"
+              class="button is-warning"
+            >
+              Actualizar
+            </a>
+            <a
+              href="{{ url_for('delete_estudiante', no_control=estudiante.no_control) }}"
+              class="button is-danger"
+            >
+              Eliminar
+            </a>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
 {% endblock %}
